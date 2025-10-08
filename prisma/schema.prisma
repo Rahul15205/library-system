@@ -22,6 +22,8 @@ model User {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
+  borrowedBooks BorrowedBook[]
+
   @@map("users")
 }
 
@@ -49,8 +51,26 @@ model Book {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
-  authorId    String
-  author      Author    @relation(fields: [authorId], references: [id])
+  authorId      String
+  author        Author    @relation(fields: [authorId], references: [id])
+  borrowedBooks BorrowedBook[]
 
   @@map("books")
+}
+
+model BorrowedBook {
+  id          String    @id @default(cuid())
+  borrowedAt  DateTime  @default(now())
+  returnedAt  DateTime?
+  dueDate     DateTime
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bookId      String
+  book        Book      @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, bookId, borrowedAt])
+  @@map("borrowed_books")
 }
