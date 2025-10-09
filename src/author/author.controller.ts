@@ -1,8 +1,10 @@
-import { Body, Controller, Post, Get, Param, Patch, Delete } from '@nestjs/common';
+import { Body, Controller, Post, Get, Param, Patch, Delete, UseGuards } from '@nestjs/common';
 import { AuthorService } from './author.service';
 import { CreateAuthorDto, UpdateAuthorDto } from './author.dto';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('author')
+@UseGuards(JwtAuthGuard)
 export class AuthorController {
     constructor(private readonly authorService : AuthorService){}
     @Post()

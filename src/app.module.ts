@@ -13,6 +13,7 @@ import { UsersService } from './users/users.service';
 import { UsersController } from './users/users.controller';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
 import configuration from './config/configuration';
 
 @Module({
@@ -22,7 +23,7 @@ import configuration from './config/configuration';
       load: [configuration],
       envFilePath: ['.env'],
     }),
-    BooksModule, AuthorModule, BorrowedBooksModule, UsersModule],
+    BooksModule, AuthorModule, BorrowedBooksModule, UsersModule, AuthModule],
   controllers: [AppController, AuthorController, BorrowedBooksController, UsersController],
   providers: [AppService, PrismaService, AuthorService, BorrowedBooksService, UsersService],
 })

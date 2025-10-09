@@ -1,8 +1,10 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { BorrowedBooksService } from './borrowed-books.service';
 import { BorrowedBookDto, ReturnBookDto } from './borrowed-books.dto';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('borrowed-books')
+@UseGuards(JwtAuthGuard)
 export class BorrowedBooksController {
     constructor(private readonly borrowedBooksService: BorrowedBooksService){}
 
