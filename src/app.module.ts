@@ -12,9 +12,17 @@ import { BorrowedBooksModule } from './borrowed-books/borrowed-books.module';
 import { UsersService } from './users/users.service';
 import { UsersController } from './users/users.controller';
 import { UsersModule } from './users/users.module';
+import { ConfigModule } from '@nestjs/config';
+import configuration from './config/configuration';
 
 @Module({
-  imports: [BooksModule, AuthorModule, BorrowedBooksModule, UsersModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [configuration],
+      envFilePath: ['.env'],
+    }),
+    BooksModule, AuthorModule, BorrowedBooksModule, UsersModule],
   controllers: [AppController, AuthorController, BorrowedBooksController, UsersController],
   providers: [AppService, PrismaService, AuthorService, BorrowedBooksService, UsersService],
 })

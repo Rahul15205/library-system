@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsDate, IsString } from "class-validator";
+import { IsDate, IsOptional, IsString } from "class-validator";
 
 export class CreateBookDto {
     @IsString()
@@ -41,4 +41,14 @@ export class UpdateBookDto {
 
     @IsString()
     authorId : string;
+}
+
+export class BooksQueryDto {
+    @IsOptional()
+    @IsString()
+    authorId? : string;
+
+    @IsOptional()
+    @IsString()
+    borrowed?: string;
 }
