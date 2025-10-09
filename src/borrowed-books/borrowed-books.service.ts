@@ -51,11 +51,21 @@ export class BorrowedBooksService {
       throw new ConflictException('User has already borrowed this book');
     }
 
+    const borrowedAt = new Date();
+    let finalDueDate = dueDate ? new Date(dueDate) : new Date();
+    if(!dueDate){
+      finalDueDate.setDate(borrowedAt.getDate() + 14);
+    }
+
+    if(finalDueDate <= borrowedAt){
+      throw new BadRequestException("Due date must be after borrowed date");
+    }
+
     const borrowedBook = await this.prisma.borrowedBook.create({
       data: {
         bookId,
         userId,
-        dueDate: new Date(dueDate),
+        dueDate: finalDueDate,
       },
       include: {
         book: {

@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsDate, IsString } from "class-validator";
+import { IsDate, IsOptional, IsString } from "class-validator";
 
 export class BorrowedBookDto {
     @IsString()
@@ -10,6 +10,7 @@ export class BorrowedBookDto {
 
     @Type(() => Date)
     @IsDate()
+    @IsOptional()
     dueDate : Date;
 }
 

@@ -4,7 +4,6 @@ import { BorrowedBookDto, ReturnBookDto } from './borrowed-books.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('borrowed-books')
-@UseGuards(JwtAuthGuard)
 export class BorrowedBooksController {
     constructor(private readonly borrowedBooksService: BorrowedBooksService){}
 
