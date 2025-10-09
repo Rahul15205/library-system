@@ -6,10 +6,16 @@ import { PrismaService } from './prisma/prisma.service';
 import { AuthorService } from './author/author.service';
 import { AuthorController } from './author/author.controller';
 import { AuthorModule } from './author/author.module';
+import { BorrowedBooksService } from './borrowed-books/borrowed-books.service';
+import { BorrowedBooksController } from './borrowed-books/borrowed-books.controller';
+import { BorrowedBooksModule } from './borrowed-books/borrowed-books.module';
+import { UsersService } from './users/users.service';
+import { UsersController } from './users/users.controller';
+import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [BooksModule, AuthorModule],
-  controllers: [AppController, AuthorController],
-  providers: [AppService, PrismaService, AuthorService],
+  imports: [BooksModule, AuthorModule, BorrowedBooksModule, UsersModule],
+  controllers: [AppController, AuthorController, BorrowedBooksController, UsersController],
+  providers: [AppService, PrismaService, AuthorService, BorrowedBooksService, UsersService],
 })
 export class AppModule {}
