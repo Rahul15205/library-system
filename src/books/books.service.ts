@@ -200,4 +200,18 @@ export class BooksService {
 
     return { message: 'Book deleted Successfully' };
   }
+
+  async findByAuthor(authorId: string){
+    const author = await this.prisma.author.findUnique({
+      where: { id: authorId },
+    });
+
+    if(!author) {
+      throw new NotFoundException("Author not Found");
+    }
+
+    return await this.prisma.author.findMany({
+      where: { id: authorId },
+    });
+  }
 }

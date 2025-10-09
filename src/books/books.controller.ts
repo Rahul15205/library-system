@@ -11,6 +11,11 @@ export class BooksController {
         return this.booksService.create(createBookDto);
     }
 
+    @Get('author/:authorId')
+    findAuthorsByBook(@Param('authorId') authorId: string){
+        return this.booksService.findByAuthor(authorId);
+    }
+
     @Get()
     findAll(@Query() booksqueryDto: BooksQueryDto){
         return this.booksService.findAll(booksqueryDto);
